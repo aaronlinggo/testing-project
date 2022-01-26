@@ -9,6 +9,9 @@
                 <p
                     class="leading-relaxed mb-8"
                 > {{ desc }} </p>
+                <p
+                    class="leading-relaxed mb-8"
+                > Uploaded by : {{ uploaded_by }} </p>
                 <div class="flex items-center flex-wrap mt-auto w-full">
                     <span
                         class="text-gray-400 mr-3 inline-flex items-center ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200"
@@ -55,7 +58,7 @@
             id: Number,
             title: String,
             desc: String,
-            uploaded_by: Number
+            uploaded_by: String
         }
     }
 </script>
