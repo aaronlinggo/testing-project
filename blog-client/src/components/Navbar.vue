@@ -1,5 +1,5 @@
 <template>
-    <Modal v-if="showMedal" @close="showMedal = false"></Modal>
+    <Modal v-if="showModal" @close="showModal = false"></Modal>
     <header class="text-gray-600 body-font bg-black-custom">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center w-3/4">
             <router-link
@@ -15,18 +15,16 @@
             </nav>
             <button
                 class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
-                @click="showModal = true"
+                @click="showModal=true"
             >
                 Login
             </button>
         </div>
     </header>
-    <div v-if="showModal" class="bg-indigo-500">AAAAAAAAAA</div>
 </template>
 
 <script>
-    import '@/components/Modal.vue'
-    import Modal from './Modal.vue';
+    import Modal from '@/components/Modal.vue'
     export default {
         name: "Navbar",
         components: {
@@ -34,11 +32,11 @@
         },
         data() {
             return {
-                showMedal: false
+                showModal: false
             }
         },
         methods: {
-
+            
         }
     };
 </script>
