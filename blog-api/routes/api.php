@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\DetailUserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,3 +26,6 @@ Route::resource('/blog', BlogController::class)->except(['destroy', 'edit', 'cre
 
 // get api detail_user
 Route::resource('/detailuser', DetailUserController::class)->except(['destroy', 'edit', 'create', 'store', 'show']);
+
+// get api comment
+Route::resource('/comment', CommentController::class)->except(['destroy', 'edit', 'create', 'show', 'update']);
