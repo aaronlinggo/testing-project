@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2022 at 04:07 AM
+-- Generation Time: Jan 26, 2022 at 02:28 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -35,6 +35,22 @@ CREATE TABLE `blogs` (
   `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `desc` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `posted_by` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE `comments` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `comment_by` bigint(20) UNSIGNED NOT NULL,
+  `post_id` bigint(20) UNSIGNED NOT NULL,
+  `comment` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -95,7 +111,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (3, '2019_08_19_000000_create_failed_jobs_table', 1),
 (4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2022_01_25_043707_create_detail_users_table', 1),
-(6, '2022_01_25_043729_create_blogs_table', 1);
+(6, '2022_01_25_043729_create_blogs_table', 1),
+(7, '2022_01_26_075755_create_comments_table', 1);
 
 -- --------------------------------------------------------
 
@@ -158,6 +175,14 @@ ALTER TABLE `blogs`
   ADD KEY `blogs_posted_by_foreign` (`posted_by`);
 
 --
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `comments_comment_by_foreign` (`comment_by`),
+  ADD KEY `comments_post_id_foreign` (`post_id`);
+
+--
 -- Indexes for table `detail_users`
 --
 ALTER TABLE `detail_users`
@@ -209,6 +234,12 @@ ALTER TABLE `blogs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `detail_users`
 --
 ALTER TABLE `detail_users`
@@ -224,7 +255,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -247,6 +278,13 @@ ALTER TABLE `users`
 --
 ALTER TABLE `blogs`
   ADD CONSTRAINT `blogs_posted_by_foreign` FOREIGN KEY (`posted_by`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `comments`
+--
+ALTER TABLE `comments`
+  ADD CONSTRAINT `comments_comment_by_foreign` FOREIGN KEY (`comment_by`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `comments_post_id_foreign` FOREIGN KEY (`post_id`) REFERENCES `blogs` (`id`);
 
 --
 -- Constraints for table `detail_users`
