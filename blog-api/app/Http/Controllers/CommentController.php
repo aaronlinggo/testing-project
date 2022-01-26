@@ -50,7 +50,9 @@ class CommentController extends Controller
     public function store(StoreCommentRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'comment'     => ['required']
+            'comment'     => ['required'],
+            'post_id'     => ['required'],
+            'comment_by'     => ['required']
         ]);
 
         if ($validator->fails()){
