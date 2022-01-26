@@ -21,7 +21,6 @@ export default {
   setup() {
     // reactive post
     let blog = ref([]);
-
     
     onMounted(() => {
         // get data from api endpoint
@@ -33,25 +32,28 @@ export default {
         });
     });
 
-    function search(id) {
-        let name = "";
-        axios.get(
-            `http://127.0.0.1:8000/api/user/${id}`
-        )
-        .then((result) => {
-            console.log(result.data.data.name);
-            name = result.data.data.name;   
-        }).catch((err) => {
-            console.log(err.response)
-        });
-
-        return name;
-    }
+    
 
     return {
         blog,
         search
     }
   }
+}
+function search(id) {
+    var name;
+    axios.get(
+        `http://127.0.0.1:8000/api/user/${id}`
+    )
+    .then((result) => {
+        console.log(result.data.data.name);
+        name = result.data.data.name;   
+    }).catch((err) => {
+        console.log(err.response)
+    });
+
+    console.log(name);
+
+    return name;
 }
 </script>
