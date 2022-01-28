@@ -1,11 +1,11 @@
 <template>
-    <div class="container px-4 py-4 mx-auto my-4 bg-white-custom rounded-lg">
+    <div class="container px-4 py-4 mx-auto my-4 bg-white-custom rounded-lg w-3/4">
         <div class="flex flex-wrap -m-12">
             <div class="p-12 flex flex-col items-start w-full">
                 <h2
                     class="sm:text-2xl text-xl title-font font-medium text-gray-900 mt-4 mb-4"
                 >{{ title }}</h2>
-                <p class="leading-relaxed mb-8">{{ excerpt }}</p>
+                <p class="leading-relaxed mb-8">{{ desc }}</p>
                 <p class="leading-relaxed mb-8">Uploaded by : {{ uploaded_by }}</p>
                 <div class="flex items-center flex-wrap mt-auto w-full">
                     <span
@@ -47,17 +47,20 @@
 
 <script>
 export default {
-    name: "Post",
+    name: "PostDetails",
     props: {
-        id: Number,
-        title: String,
-        desc: String,
-        uploaded_by: String
+        id: Number
     },
-    computed: {
-        excerpt() {
-            return this.desc.length > 100 ? this.desc.substring(0, 100) + '...' : this.desc
+    data() {
+        return {
+            //TODO: request from database the other property based on the id
+            title: 'temp title',
+            desc: 'temp desc',
+            uploaded_by: 'temp uploaded_by'
         }
     }
 }
 </script>
+
+<style>
+</style>

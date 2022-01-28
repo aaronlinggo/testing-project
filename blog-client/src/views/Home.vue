@@ -1,8 +1,15 @@
 <template>
   <div class="container mx-auto w-3/4">
     <section class="text-gray-600 body-font overflow-hidden">
-      <div v-for="(post, index) in blog.data" :key="index">
-        <Post v-bind:id="post.id" v-bind:title="post.title" v-bind:desc="post.desc" v-bind:uploaded_by="search(post.posted_by)"></Post>
+      <div v-for="post in blog.data" :key="post.id">
+        <router-link :to="{ name: 'PostDetails', params: { id: post.id } }">
+          <Post
+            :id="post.id"
+            :title="post.title"
+            :desc="post.desc"
+            :uploaded_by="search(post.posted_by)"
+          ></Post>
+        </router-link>
       </div>
     </section>
   </div>
@@ -10,7 +17,7 @@
 
 <script>
 import Post from '@/components/Post.vue'
-import {onMounted, ref} from 'vue'
+import { onMounted, ref } from 'vue'
 import axios from 'axios'
 
 export default {
@@ -21,39 +28,39 @@ export default {
   setup() {
     // reactive post
     let blog = ref([]);
-    
+
     onMounted(() => {
-        // get data from api endpoint
-        axios.get('http://127.0.0.1:8000/api/blog')
+      // get data from api endpoint
+      axios.get('http://127.0.0.1:8000/api/blog')
         .then((result) => {
-            blog.value = result.data    
+          blog.value = result.data
         }).catch((err) => {
-            console.log(err.response)
+          console.log(err.response)
         });
     });
 
-    
+
 
     return {
-        blog,
-        search
+      blog,
+      search
     }
   }
 }
 function search(id) {
-    var name;
-    axios.get(
-        `http://127.0.0.1:8000/api/user/${id}`
-    )
+  var name;
+  axios.get(
+    `http://127.0.0.1:8000/api/user/${id}`
+  )
     .then((result) => {
-        console.log(result.data.data.name);
-        name = result.data.data.name;   
+      console.log(result.data.data.name);
+      name = result.data.data.name;
     }).catch((err) => {
-        console.log(err.response)
+      console.log(err.response)
     });
 
-    console.log(name);
+  console.log(name);
 
-    return name;
+  return name;
 }
 </script>
