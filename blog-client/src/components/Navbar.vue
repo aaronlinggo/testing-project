@@ -1,5 +1,5 @@
 <template>
-    <Modal v-if="showModal" @close="showModal = false"></Modal>
+    <SignInSignUpModal v-if="showModal" @close="showModal = false"></SignInSignUpModal>
     <header class="text-gray-600 body-font bg-black-custom">
         <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center w-3/4">
             <router-link
@@ -24,11 +24,11 @@
 </template>
 
 <script>
-    import Modal from '@/components/Modal.vue'
+    import SignInSignUpModal from './SignInSignUpModal.vue';
     export default {
         name: "Navbar",
         components: {
-            Modal
+            SignInSignUpModal
         },
         data() {
             return {
