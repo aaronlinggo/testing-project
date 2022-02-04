@@ -39,8 +39,6 @@ export default {
         });
     });
 
-
-
     return {
       blog,
       search
@@ -48,19 +46,14 @@ export default {
   }
 }
 function search(id) {
-  var name;
-  axios.get(
-    `http://127.0.0.1:8000/api/user/${id}`
-  )
+    axios.get(
+      `http://127.0.0.1:8000/api/user/${id}`
+    )
     .then((result) => {
-      console.log(result.data.data.name);
-      name = result.data.data.name;
+      console.log(result.data);
+      return result.data.data.name;
     }).catch((err) => {
       console.log(err.response)
     });
-
-  console.log(name);
-
-  return name;
 }
 </script>

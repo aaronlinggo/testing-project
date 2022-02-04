@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 26, 2022 at 04:12 PM
+-- Generation Time: Jan 26, 2022 at 04:26 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.1
 
@@ -23,30 +23,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `blog-api` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE `blog-api`;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `blogs`
---
-
-DROP TABLE IF EXISTS `blogs`;
-CREATE TABLE `blogs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `desc` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `posted_by` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `blogs`
---
-
-INSERT INTO `blogs` (`id`, `title`, `desc`, `posted_by`, `created_at`, `updated_at`) VALUES
-(1, 'test Title', 'test Desc', 1, NULL, NULL);
-
--- --------------------------------------------------------
+-- -------------------------------------------------------
 
 --
 -- Table structure for table `comments`
@@ -176,6 +153,31 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Aaron Linggo Satria', 'aaronlinggosatria@gmail.com', 'tes123', NULL, NULL, NULL);
+
+--
+-- Table structure for table `blogs`
+--
+
+-- --------------------------------------------------------
+
+DROP TABLE IF EXISTS `blogs`;
+CREATE TABLE `blogs` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `desc` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `posted_by` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `title`, `desc`, `posted_by`, `created_at`, `updated_at`) VALUES
+(1, 'test Title', 'test Desc', 1, NULL, NULL);
+
+-- --------------------------------------------------------
 
 --
 -- Indexes for dumped tables
