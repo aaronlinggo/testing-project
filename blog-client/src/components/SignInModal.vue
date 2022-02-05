@@ -24,7 +24,7 @@
             </svg>
           </div>
           <h2 class="text-center text-3xl font-extrabold text-gray-900">Sign In</h2>
-          <form class="mt-8 space-y-6" action="#" method="POST">
+          <form class="mt-8 space-y-6" @submit.prevent="store()">
             <input type="hidden" name="remember" value="true" />
             <div class="rounded-md shadow-sm -space-y-px">
               <div>
@@ -37,7 +37,11 @@
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Email address"
+                  v-model="login.email"
                 />
+                <div v-if="validation.email" class="text-red-500">
+                    {{ validation.email[0] }}
+                </div>
               </div>
               <div>
                 <label for="password" class="sr-only">Password</label>
@@ -49,7 +53,11 @@
                   required
                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                   placeholder="Password"
+                  v-model="login.password"
                 />
+                <div v-if="validation.password" class="text-red-500">
+                    {{ validation.password[0] }}
+                </div>
               </div>
             </div>
 
@@ -60,6 +68,7 @@
                   name="remember-me"
                   type="checkbox"
                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                  v-model="login.remember_me"
                 />
                 <label for="remember-me" class="ml-2 block text-sm text-gray-900">Remember me</label>
               </div>
@@ -74,7 +83,6 @@
 
             <div>
               <button
-                type="submit"
                 class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -105,12 +113,45 @@
 </template>
 
 <script>
+import {reactive, ref} from 'vue'
+import {useRouter} from 'vue-router'
+import axios from 'axios'
+
 export default {
   name: "SignInModal",
-  data() {
-    return {
+  setup() {
+        // data binding
+        const login = reactive({
+            email: '',
+            password: '',
+            remember_me: true
+        });
+
+        const validation = ref([]);
+
+        const router = useRouter();
+
+        function store(){
+            axios.post(
+                'http://127.0.0.1:8000/api/auth/login',
+                login
+            )
+            .then(() => {
+                // router.push({
+                //     name: 'user.index'
+                // });
+                alert('success');
+            }).catch((err) => {
+                validation.value = err.response.data
+            });
+        }
+        return {
+            login,
+            validation,
+            router,
+            store
+        }
     }
-  }
 }
 </script>
 
