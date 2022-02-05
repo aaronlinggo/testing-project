@@ -11,6 +11,7 @@
           ></Post>
         </router-link>
       </div>
+      <Pagination></Pagination>
     </section>
   </div>
 </template>
@@ -19,11 +20,13 @@
 import Post from '@/components/Post.vue'
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import Pagination from '@/components/Pagination.vue'
 
 export default {
   name: 'Home',
   components: {
-    Post
+    Post,
+    Pagination
   },
   setup() {
     // reactive post
