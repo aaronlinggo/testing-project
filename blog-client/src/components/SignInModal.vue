@@ -136,11 +136,13 @@ export default {
                 'http://127.0.0.1:8000/api/auth/login',
                 login
             )
-            .then(() => {
+            .then((response) => {
                 // router.push({
                 //     name: 'user.index'
                 // });
-                alert('success');
+                // alert('success');
+                alert(response.data.access_token);
+                console.log(response);
             }).catch((err) => {
                 validation.value = err.response.data
             });

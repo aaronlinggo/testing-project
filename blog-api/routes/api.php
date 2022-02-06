@@ -26,7 +26,7 @@ Route::group([
     'prefix' => 'auth'
 ], function (){
     Route::post('login', 'App\Http\Controllers\AuthController@login');
-    Route::post('signup', 'App\Http\Controllers\AuthController@signup');
+    Route::post('signup', 'App\Http\Controllers\AuthController@register');
 
     Route::group([
         'middleware' => 'auth:api'
@@ -46,4 +46,4 @@ Route::resource('/detailuser', DetailUserController::class)->except(['destroy', 
 Route::resource('/comment', CommentController::class)->except(['destroy', 'edit', 'create', 'show', 'update']);
 
 // get api user
-Route::resource('/user', UserController::class)->except(['destroy', 'edit', 'create', 'update', 'store', 'index']);
+// Route::resource('/user', UserController::class)->except(['destroy', 'edit', 'create', 'update', 'store', 'index']);
