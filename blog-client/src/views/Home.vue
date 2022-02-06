@@ -53,10 +53,24 @@ function search(id) {
       `http://127.0.0.1:8000/api/user/${id}`
     )
     .then((result) => {
-      console.log(result.data);
+      // temp = result.data.data.name;
+      // console.log(temp);
+      console.log(result)
       return result.data.data.name;
+      // console.log(result.data.data.name);
     }).catch((err) => {
       console.log(err.response)
     });
+  //   url = `http://127.0.0.1:8000/api/user/${id}`;
+  //   try {
+  //   return await axios.get(url).then(content => content.data.data.name);
+  // } catch (error) {
+  //   throw {
+  //     code: error.code,
+  //     message: error.message,
+  //     responseStatus: error.response?.status,
+  //     url
+  //   };
+  // }
 }
 </script>

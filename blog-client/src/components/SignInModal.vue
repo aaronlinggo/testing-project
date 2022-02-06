@@ -116,6 +116,7 @@
 import {reactive, ref} from 'vue'
 import {useRouter} from 'vue-router'
 import axios from 'axios'
+console.log(localStorage.getItem('user'));
 
 export default {
   name: "SignInModal",
@@ -141,8 +142,21 @@ export default {
                 //     name: 'user.index'
                 // });
                 // alert('success');
-                alert(response.data.access_token);
+                // console.log(response);
+
+                let newToken=response.data.access_token;
+                window.token=newToken;
+                let user=response.data.user;	
+                localStorage.setItem('token',newToken);
+                localStorage.setItem('user',JSON.stringify(user));
+
+                // window.axios.defaults.params['api_token']=newToken;
+                // Event.$emit('login',user);
+
+                router.push('/');
                 console.log(response);
+                alert(response.data.access_token);
+
             }).catch((err) => {
                 validation.value = err.response.data
             });
@@ -155,6 +169,8 @@ export default {
         }
     }
 }
+
+
 </script>
 
 <style scoped>

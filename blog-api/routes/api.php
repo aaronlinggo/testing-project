@@ -46,4 +46,4 @@ Route::resource('/detailuser', DetailUserController::class)->except(['destroy', 
 Route::resource('/comment', CommentController::class)->except(['destroy', 'edit', 'create', 'show', 'update']);
 
 // get api user
-// Route::resource('/user', UserController::class)->except(['destroy', 'edit', 'create', 'update', 'store', 'index']);
+Route::resource('/user', UserController::class)->except(['destroy', 'edit', 'create', 'update', 'store', 'index']);
